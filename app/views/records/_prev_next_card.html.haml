@@ -1,0 +1,11 @@
+.card
+  .content
+    .header Previous / Next
+    .description
+      %p
+        - if @previous
+          %a.ui.primary.tiny.button.mb-1{ role: 'button', href: record_collection_path(@collection, @previous)}= '<<'
+        - if @next
+          %a.ui.primary.tiny.button.mb-1{ role: 'button', href: record_collection_path(@collection, @next)}= '>>'
+      %p
+        %a.ui.tiny.button.mb-1{ role: 'button', href: collection_path(@collection)}= "Collection #{@collection.name}"

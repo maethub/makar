@@ -1,0 +1,3 @@
+- Collection.find_each do |c|
+  %div{ id: "record-collection-#{record.id}-#{c.id}", style: 'float: left;'}
+    = render partial: 'records/collection', locals: { record: record, collection: c }

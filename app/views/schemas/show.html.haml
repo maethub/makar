@@ -1,0 +1,22 @@
+.row
+  .column
+    %h3= "Schema #{@schema.name}"
+.row
+  .column
+    %textarea#editor= @schema.schema
+.row
+  .column
+    = link_to 'Edit', edit_schema_path(@schema), class: 'ui button primary', role: 'button'
+    = link_to 'Delete', schema_path(@schema), method: :delete, class: 'ui button red', role: 'button'
+
+
+:javascript
+  var ta = document.getElementById("editor");
+  var myCodeMirror = CodeMirror.fromTextArea(ta, {
+    mode: 'application/json',
+    lineNumbers: true,
+    lineWrapping: true,
+    matchBrackets: true,
+    autoCloseBrackets: true,
+    readOnly: true
+  });

@@ -1,0 +1,29 @@
+.row
+  .column
+    %h3 Jobs
+.row
+  .column
+    %table.ui.celled.compact.table
+      %thead.full-width
+        %tr
+          %th ID
+          %th Name
+          %th Status
+          %th Output
+          %th Error
+          %th CreatedAt
+      %tbody
+        - @jobs.each do |j|
+          %tr
+            %td= j.id
+            %td= j.name
+            %td= j.status
+            %td
+              %span{ style: "white-space: pre-line"}= j.output&.truncate(200)
+            %td
+              %span{ style: "white-space: pre-line"}= j.error&.truncate(200)
+            %td= j.created_at
+      %tfoot.full-width
+        %tr
+          %th{ colspan: 6 }
+            = will_paginate @jobs

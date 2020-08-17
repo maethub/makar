@@ -1,0 +1,36 @@
+.two.column.row
+  .column
+    %h3= "Collection #{@collection.name}"
+
+    %h4= 'Description'
+    %p= @collection.description
+
+    %h4= 'Auto-Filter'
+    - if @collection.filter
+      = link_to update_filter_collection_path(@collection), class: 'ui button icon basic blue', role: 'button' do
+        %i.icon.refresh
+      = link_to @collection.filter.name, @collection.filter.url
+
+  .column
+    = render partial: 'export', locals: { collection: @collection }
+.row
+  .column
+    = link_to 'Edit', edit_collection_path(@collection), class: 'ui button primary', role: 'button'
+    = link_to 'Delete', collection_path(@collection), method: :delete, class: 'ui button red confirmation', role: 'button'
+    = link_to 'Drop ALL Records', drop_records_collection_path(@collection), method: :post, class: 'ui button red confirmation', role: 'button'
+    = link_to 'Table View', table_collection_path(@collection), class: 'ui button green', role: 'button'
+    = link_to 'Custom Exports', special_export_index_collection_path(@collection), class: 'ui button yellow', role: 'button'
+
+.row
+  .column
+    = render partial: 'records/table', locals: { records: @records }
+
+:javascript
+  $('.confirmation').on('click', function () {
+    var check = confirm("Are you sure?");
+    if (check == true) {
+      return true;
+    } else {
+      return false;
+    }
+  });

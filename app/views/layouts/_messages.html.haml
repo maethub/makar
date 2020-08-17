@@ -1,0 +1,12 @@
+-# Rails flash messages styled for Bootstrap 4.0
+- if flash.any?
+  - flash.each do |name, msg|
+    - if msg.is_a?(String)
+      .row
+        .column
+          .ui.icon.message
+            - if name.to_s == 'danger'
+              %i.icon.exclamation
+            - else
+              %i.icon.info
+            .content= msg

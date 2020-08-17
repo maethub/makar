@@ -1,0 +1,39 @@
+// Semantic UI
+@import "semantic-ui";
+
+// Codemirror editor
+@import "codemirror";
+
+// Selectize.js
+@import 'selectize';
+@import 'selectize.default';
+
+// Clusterize
+@import 'clusterize.js/clusterize';
+
+
+// Custom overrides
+//mark, .mark {
+//  padding: 0.1em;
+//  background-color: $yellow;
+//}
+
+#content {
+  padding-top: 56px;
+}
+
+.ui.borderless.menu {
+  box-shadow: none;
+  flex-wrap: wrap;
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.ui.mobile.only.grid .ui.menu .ui.vertical.menu {
+  display: none;
+}
+
+.mb-1 {
+  margin-bottom: 1px !important;
+}

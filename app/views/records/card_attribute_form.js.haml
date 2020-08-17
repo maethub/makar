@@ -1,0 +1,1 @@
+$("#card_attribute_form_#{@record.id}_#{attr}").html("#{escape_javascript(render partial: 'records/card_attribute_form', locals: { attr: attr, error: error } ) }");

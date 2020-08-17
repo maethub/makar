@@ -1,0 +1,31 @@
+{
+  "definitions": {
+    "attribute": {
+      "id": "#attribute",
+      "title": "attribute",
+      "type": "object",
+      "required": ["name", "type"],
+      "properties": {
+        "name"      : { "type": "string" },
+        "type"      : { "type": "string", "enum":  ["int", "bool", "string", "html", "date"] },
+        "required"  : { "type": "boolean" },
+        "multiple"  : { "type": "boolean" },
+        "input"     : { "type": "boolean" }
+      }
+    }
+  },
+
+  "type": "object",
+  "id": "#record",
+  "title": "record",
+  "required": ["name", "attributes"],
+  "properties": {
+    "name": { "type": "string" },
+    "attributes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/definitions/attribute"}
+    }
+  }
+}

@@ -1,0 +1,11 @@
+
+%h4 Export
+= simple_form_for :collection_export, url: export_collection_path(collection), method: :get, input_html: { class: 'ui form' } do |f|
+  = f.input :export_attributes,
+          label: 'Attributes',
+          collection: question_attributes_collection(collection),
+          include_blank: false,
+          include_hidden: false,
+          input_html: { class: 'ui dropdown', multiple: true }
+  = f.input :export_format, collection: ['json', 'csv', 'files', 'mallet'], include_blank: false, input_html: { class: 'ui dropdown' }
+  = f.button :submit, 'Export', class: 'no-disable'

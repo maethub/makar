@@ -1,0 +1,6 @@
+{
+  "name": "TestRecord",
+  "attributes": [
+    { "name": "myDate", "type": "date" }
+  ]
+}

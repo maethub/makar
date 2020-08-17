@@ -1,0 +1,6 @@
+- questions.each do |q|
+  %a.list-group-item.list-group-item-action{ href: question_path(q[:id]) }
+    .d-flex.w-100.justify-content-between
+      %h5.mb-1= q[:question].title
+      %small= q[:score]
+    %p.similarity-questions-result.mb-1= q[:question].question_stripped || q[:question].question

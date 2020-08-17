@@ -1,0 +1,23 @@
+.row
+  .column
+    %h3
+      Schemas
+      = action_link new_schema_path, 'plus', 'basic mini'
+
+.row
+  .column
+    %table.ui.celled.compact.table
+      %thead.full-width
+        %tr
+          %th ID
+          %th Name
+          %th &nbsp;
+      %tbody
+        - @schemas.each do |s|
+          %tr
+            %td= s.id
+            %td= s.name
+            %td{ style: 'width: 100px;'}
+              .ui.icons.buttons
+                = action_link schema_path(s), 'search', 'ui button'
+                = action_link schema_path(s), 'delete', 'ui button red', method: :delete

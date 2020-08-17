@@ -1,0 +1,3 @@
+.field.string{ 'data-object-name' => f.object_name, 'escape_attributes' => false }
+  %label Attribute
+  = f.attribute_select(options = { associations: %w(record_values) }, html_options = { class: 'ui'} )

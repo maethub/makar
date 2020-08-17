@@ -1,0 +1,26 @@
+= simple_form_for :select_action, url: select_action_records_path, method: :put do |f|
+  - unless @collection
+    = f.input :collection, collection: collection_collection, include_blank: false
+    = f.button :submit, 'Add to collection', class: 'btn btn-outline-primary btn-sm',
+               formaction: select_action_records_path(submit_action: 'add_collection')
+    = f.button :submit, 'Remove from collection', class: 'btn btn-outline-warning btn-sm',
+             formaction: select_action_records_path(submit_action: 'remove_collection')
+
+  .ui.button.basic.green.right.floated.mb-1= "Found #{@records.total_entries} records"
+
+
+  %table.ui.celled.compact.table
+    %thead.full-width
+      %tr
+        %th= f.input_field :select_all, as: :boolean, class: 'select-all'
+        %th ID
+        %th Schema
+        %th Data
+        %th &nbsp;
+    %tbody
+      - records.each do |r|
+        %tr{id: "record-row-#{r.id}"}
+          = render partial: 'records/row', locals: { r: r, f: f }
+    %tfoot.full-width
+      %tr
+        %th{ colspan: 7 }= will_paginate records

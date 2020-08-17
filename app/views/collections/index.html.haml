@@ -1,0 +1,24 @@
+.row
+  .column
+    %h3
+      Collections
+      = action_link new_collection_path, 'plus', 'basic mini'
+
+.row
+  .column
+    %table.ui.celled.compact.table
+      %thead.full-width
+        %tr
+          %th ID
+          %th Name
+          %th Description
+          %th &nbsp;
+      %tbody
+        - @collections.each do |c|
+          %tr
+            %td= c.id
+            %td= c.name
+            %td= c.description.truncate(250)
+            %td{ style: 'width: 100px;'}
+              = action_link collection_path(c), 'search', 'ui button'
+  = will_paginate @collections

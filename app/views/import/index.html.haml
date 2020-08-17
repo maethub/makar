@@ -1,0 +1,119 @@
+.row
+  .column
+    %h3 Import
+  -#.row
+  -#  - if @log
+  -#    .col
+  -#      .card.card-body
+  -#        .alert.alert-info
+  -#          %span{ style: 'white-space: pre-line' }= @log
+  -#  .col
+  -#    .card.card-body
+  -#      %h4.card-title Quora
+  -#      = simple_form_for :quora, url: import_quora_path, method: :post do |f|
+  -#        .form-inputs
+  -#          = f.input :file, as: :file
+  -#        .form-actions
+  -#          = f.button :submit, 'Upload'
+  -#
+  -#  .col
+  -#    .card.card-body
+  -#      %h4.card-title Stackoverflow (API Call)
+  -#      = simple_form_for :se, url: import_stackexchange_path, method: :post do |f|
+  -#        .alert.alert-info
+  -#          This action imports questions directly from the Stackexchange API into this tool.
+  -#          You have to provide at least one tag. Multiple tags can be provided as input separated by a semicolon.
+  -#        .form-inputs
+  -#          = f.label :tagged
+  -#          = f.input :tagged, input_html: { class: 'mb-2' }
+  -#          = f.label :nottagged, required: false
+  -#          = f.input :nottagged, input_html: { class: 'mb-2' }
+  -#          = f.label :page, required: false
+  -#          = f.input :page, input_html: { class: 'mb-2' }
+  -#        .form-actions
+  -#          = f.button :submit, 'Import'
+
+-#.row
+-#  .column
+-#    = simple_form_for :se_data, url: import_stackexchange_data_path, method: :post do |f|
+-#      .ui.card
+-#        .content
+-#          .header
+-#            %h4.card-title CSV Import
+-#          .description
+-#            %p= "Upload a valid CSV"
+-#            -#This action imports records from a CSV created by the StackExchange Data Explorer. A query that produces
+-#            -#a valid CSV to be uploaded here can be found at
+-#            -#%a{ href: 'https://data.stackexchange.com/stackoverflow/query/926699/questions-with-acceptedanswer-for-specific-tag'} https://data.stackexchange.com/stackoverflow/query/926699
+-#            %p= f.input :file, as: :file
+-#        .extra.content
+-#          = f.button :submit, 'Upload'
+.row
+  .column
+    - import = Import::CsvImport.new
+    %h3 CSV
+    .ui.form
+    = simple_form_for :import_plugin, url: import_plugin_path(import.class.name), method: :post do |f|
+      - import.inputs.each do |key, val|
+        = dynamic_input_helper f, key, val
+      = f.button :submit, 'Upload'
+
+.row
+  .column
+    - import = Import::JsonImport.new
+    %h3 JSON
+    .ui.form
+    = simple_form_for :import_plugin, url: import_plugin_path(import.class.name), method: :post do |f|
+      - import.inputs.each do |key, val|
+        = dynamic_input_helper f, key, val
+      = f.button :submit, 'Upload'
+
+.row
+  .column
+    - import = Import::StackoverflowSearchExcerptImport.new
+    %h3 Stackoverflow Search Excerpt API
+    .ui.form
+    = simple_form_for :import_plugin, url: import_plugin_path(import.class.name), method: :post do |f|
+      - import.inputs.each do |key, val|
+        = dynamic_input_helper f, key, val
+      = f.button :submit, 'Upload'
+
+.row
+  .column
+    - import = Import::ApacheMlImport.new
+    %h3 Apache Mailing Lists
+    .ui.form
+    = simple_form_for :import_plugin, url: import_plugin_path(import.class.name), method: :post do |f|
+      - import.inputs.each do |key, val|
+        = dynamic_input_helper f, key, val
+      = f.button :submit, 'Upload'
+
+.row
+  .column
+    - import = Import::ApacheMlFullImport.new
+    %h3 Apache Mailing Lists (All Mails, only metadata)
+    .ui.form
+    = simple_form_for :import_plugin, url: import_plugin_path(import.class.name), method: :post do |f|
+      - import.inputs.each do |key, val|
+        = dynamic_input_helper f, key, val
+      = f.button :submit, 'Upload'
+
+.row
+  .column
+    - import = Import::GithubPrImport.new
+    %h3 GH PR
+    .ui.form
+    = simple_form_for :import_plugin, url: import_plugin_path(import.class.name), method: :post do |f|
+      - import.inputs.each do |key, val|
+        = dynamic_input_helper f, key, val
+      = f.button :submit, 'Upload'
+
+.row
+  .column
+    - import = Import::GithubApiImport.new
+    %h3 GH Issues
+    .ui.form
+    = simple_form_for :import_plugin, url: import_plugin_path(import.class.name), method: :post do |f|
+      - import.inputs.each do |key, val|
+        = dynamic_input_helper f, key, val
+      = f.button :submit, 'Upload'

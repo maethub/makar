@@ -1,0 +1,5 @@
+- class_selector = SecureRandom.hex(5)
+%i.icon.add{ onclick: "$('##{class_selector}').modal('show');"}
+  .ui.modal{ id: class_selector }
+    .header= title
+    .content= content

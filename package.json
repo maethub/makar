@@ -1,0 +1,12 @@
+{
+  "name": "questions_manager",
+  "private": true,
+  "dependencies": {
+    "ace-builds": "^1.4.4",
+    "clusterize.js": "^0.18.1"
+  },
+  "devDependencies": {
+    "jquery": "^3.3.1",
+    "jquery-ujs": "^1.2.2"
+  }
+}

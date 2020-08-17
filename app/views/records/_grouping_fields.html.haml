@@ -1,0 +1,18 @@
+.ui.segment.ransack_fields{ 'data-object-name' => f.object_name }
+  .inline.fields
+    .four.wide.field
+      %label Matches
+      = f.combinator_select
+    .twelve.wide.field
+      %label conditions
+    = button_to_remove_fields
+
+  = f.condition_fields do |c|
+    = render 'condition_fields', f: c
+
+  = button_to_add_fields(f, :condition)
+
+  = f.grouping_fields do |g|
+    = render 'grouping_fields', f: g
+
+  = button_to_nest_fields :grouping

@@ -1,0 +1,38 @@
+.row
+  .column
+    .ui.three.stackable.cards
+      .card
+        .content
+          .header= "Record ##{@record.id}"
+      .card
+        .content
+          .header Schema
+          .description= @record.schema.name
+      - if @previous || @next
+        = render partial: 'records/prev_next_card.html.haml'
+
+.row
+  .column
+    .ui.one.stackable.cards
+      .card
+        .content
+          .header Collections
+          .description
+            = render partial: 'records/card_collections', locals: { record: @record }
+
+.row
+  .column
+    %h4= "Values"
+
+.one.column.row
+  .column
+    .ui.three.stackable.cards
+      - @record.attributes.each do |attr|
+        - if @record.schema.input?(attr)
+          -# Render an input for this attribute
+          %div.card{ id: "card_attribute_form_#{@record.id}_#{attr}"}
+            = render partial: 'records/card_attribute_form', locals: { record: @record, attr: attr, config: config }
+        - elsif @record.respond_to?(attr) && !@record.send(attr).nil?
+          = render partial: 'records/card_attribute', locals: { record: @record, attr: attr, config: config }
+
+

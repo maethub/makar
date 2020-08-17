@@ -1,0 +1,42 @@
+-#= search_form_for r, builder: SimpleForm::FormBuilder, html: { class: 'ui form' } do |f|
+= search_form_for r, html: { method: :get, class: 'ui form' } do |f|
+  - setup_search_form(f)
+  = f.input :schema_id_eq, label: 'Schema', collection: Schema.all, input_html: { class: 'ui dropdown' }
+  = f.input :collections_id_eq, label: 'Collection', collection: Collection.all, input_html: { class: 'ui dropdown' }, include_blank: true
+
+  -# Advanced Ransack search form
+  %h5 Advanced Search
+  = f.grouping_fields do |g|
+    = render 'grouping_fields', f: g
+  = button_to_add_fields f, :grouping
+
+  -# Filter saving
+  .two.fields{ style: 'margin-top: 30px;' }
+    .four.wide.field
+      %label= 'Save Query'
+      .ui.toggle.checkbox
+        = check_box_tag 'filter[save]', '1'
+        = f.label ''
+    .twelve.wide.field
+      %label= 'Filter Name'
+      .two.fields
+        .twelve.wide.field
+          = select_tag 'filter[name]', options_for_select(Filter.order(name: :desc).pluck(:name), @filter&.name), class: 'filter-autocomplete'
+        .four.wide.field
+          %button.ui.blue.basic.button.right.floated#load-filter-button= "Load Filter"
+  = f.button :submit, 'Search'
+  -#= f.submit 'Search'
+
+
+
+:javascript
+  // Selectize Dropdown
+  $(".filter-autocomplete").selectize({
+    create: true
+  });
+
+  // Load Filter action
+  $("#load-filter-button").on('click', function(e) {
+    e.preventDefault();
+    window.location.href =  "/records?load_filter=" + $(".filter-autocomplete").val();
+  });

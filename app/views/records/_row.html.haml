@@ -1,0 +1,14 @@
+- td_class = r.deactivated ? 'error' : ''
+%td{ class: td_class }
+  - if f
+    = f.check_box 'record_ids', { multiple: true }, r.id, false
+  - else
+    = check_box_tag 'select_action[record_ids][]', r.id
+%td{ class: td_class }= r.id
+%td{ class: td_class }= r.schema.name
+%td{ class: td_class }= r.inspect
+%td{ class: td_class }
+  .ui.icon.buttons
+    - record_link = @collection ? record_collection_path(@collection, r) : record_path(r)
+    = action_link record_link, 'search', 'mini'
+    = action_link toggle_status_record_path(r), ( r.deactivated ? 'redo' : 'delete' ), 'mini red', remote: true

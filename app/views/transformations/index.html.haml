@@ -1,0 +1,17 @@
+.row
+  .column
+    %h3 Transformations
+
+- @transformations.each do |t|
+  .row
+    .column
+      = simple_form_for :run_transformation, url: run_transformations_path, method: :get, input_html: { class: 'ui form' } do |f|
+        = f.hidden_field :transformation, value: t.to_sym
+        %h4= t.to_sym
+        %p= t::DESCRIPTION
+        .fields
+          - t::INPUTS.each do |key, val|
+            = dynamic_input_helper f, key, val
+        .fields
+          = f.button :submit, 'Run'
+

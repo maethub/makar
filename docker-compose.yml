@@ -1,0 +1,32 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: "${DATABASE_PASSWORD}"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8090:8080
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle install && npm install && RAILS_ENV=production rails assets:precompile && RAILS_ENV=production rails server puma"
+    ports:
+      - "3000:3000"
+    links:
+      - db
+    volumes:
+      - .:/app
+  worker:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && RAILS_ENV=production bundle install && RAILS_ENV=production bundle exec bin/delayed_job -n2 restart && tail -f log/delayed_job.log"
+    links:
+      - db
+    volumes:
+      - .:/app
+volumes:
+  pgdata:

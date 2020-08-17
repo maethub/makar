@@ -1,0 +1,9 @@
+.content
+  .header= "#{attr}"
+  .description
+    - if defined?(error) && error
+      .ui.negative.message= error
+    = simple_form_for :record_value, url: save_record_value_record_path(@record), remote: true do |f|
+      = f.input :attr, as: :hidden, input_html: { value: attr }
+      = f.input :data, label: false, input_html: { value: @record.send(attr) }
+      = f.button :submit

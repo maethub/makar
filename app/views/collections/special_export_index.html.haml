@@ -1,0 +1,17 @@
+.row
+  .column
+    %h3 Custom Exports
+
+- @exports.each do |t|
+  .row
+    .column
+      = simple_form_for :special_export, url: special_export_collection_path(@collection), method: :post, input_html: { class: 'ui form' } do |f|
+        = f.hidden_field :export, value: t.to_sym
+        %h4= t.to_sym
+        %p= t::DESCRIPTION
+        .fields
+          - t::INPUTS.each do |key, val|
+            = dynamic_input_helper f, key, val
+        .fields
+          = f.button :submit, 'Run'
+

@@ -1,0 +1,32 @@
+.container-fluid
+  %h3 Examples
+  .row
+    .col
+      .card.card-body
+        %h4.card-title Question Similarity
+        = form_tag '' do
+          .form-group
+            = text_field :search, nil, style: 'width: 100%', class: 'form-control', placeholder: 'Start typing...'
+        %ul.list-group#similarity-results
+
+:javascript
+  var timeoutHandler = null;
+
+  function searchRequest(search) {
+    $.get( "examples/question_similarity", { search: event.target.value }, function( data ) {
+      requestRunning = false;
+      $("#similarity-results").html(data);
+      $(".similarity-questions-result").mark(search, { separateWordSearch: true });
+    });
+  }
+
+  $('#search_').on('input', function(event) {
+    searchTerm = event.target.value;
+
+    if(searchTerm.length > 5 ){
+      if(timeoutHandler != null) {
+        clearTimeout(timeoutHandler)
+      }
+      timeoutHandler = setTimeout(searchRequest(searchTerm, 400));
+    }
+  });

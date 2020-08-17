@@ -1,0 +1,79 @@
+.clusterize
+  %table.ui.celled.table#headersArea{ style: 'margin-bottom: 0px;' }
+    %thead
+      %tr
+        - @schema.attributes.each do |a|
+          %th= a
+  .clusterize-scroll#scrollArea{style: 'max-height: 1000px;'}
+    %table.ui.celled.table
+      %tbody.clusterize-content#contentArea
+        %tr.clusterize-no-data
+          %td Loading data...
+
+:javascript
+
+  var $scroll = $('#scrollArea');
+  var $content = $('#contentArea');
+  var $headers = $("#headersArea");
+
+  $.getJSON("/collections/#{@collection.id}/records?schema_id=#{@schema.id}", function( data ) {
+    var items = [];
+    var row = [];
+    $.each(data, function( _key, val ) {
+      row = [];
+      $.each(val, function( _key2, cell ) {
+        row.push("<td>" + cell + "</td>");
+      });
+      items.push("<tr>" + row.join("") + "</tr>");
+    });
+
+    var clusterize = new Clusterize(
+      {
+        rows: items,
+        scrollId: 'scrollArea',
+        contentId: 'contentArea',
+        callbacks: {
+          clusterChanged: function() {
+            fitHeaderColumns();
+            setHeaderWidth();
+          }
+        }
+      }
+    );
+  });
+
+
+  /**
+   * Keep header equal width to tbody
+   */
+  var setHeaderWidth = function() {
+    $headers.width($content.width());
+    $scroll.width($content.width());
+  }
+
+  /**
+   * Set left offset to header to keep equal horizontal scroll position
+   */
+  var setHeaderLeftMargin = function(scrollLeft) {
+    $headers.css('margin-left', -scrollLeft);
+  }
+
+  /**
+   * Makes header columns equal width to content columns
+   */
+  var fitHeaderColumns = (function() {
+    var prevWidth = [];
+    return function() {
+      var $firstRow = $content.find('tr:not(.clusterize-extra-row):first');
+      var columnsWidth = [];
+      $firstRow.children().each(function() {
+        columnsWidth.push($(this).width());
+      });
+      if (columnsWidth.toString() == prevWidth.toString()) return;
+      $headers.find('tr').children().each(function(i) {
+        $(this).width(columnsWidth[i]);
+      });
+      prevWidth = columnsWidth;
+    }
+  })();
+

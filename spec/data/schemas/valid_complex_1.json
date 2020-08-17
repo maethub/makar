@@ -1,0 +1,9 @@
+{
+  "name": "Car",
+  "attributes": [
+    { "name": "id", "type":  "int"},
+    { "name": "name", "type": "string" },
+    { "name": "creation_date", "type": "date" },
+    { "name": "supercar", "type": "bool" }
+  ]
+}

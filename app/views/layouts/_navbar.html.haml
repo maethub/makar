@@ -1,0 +1,53 @@
+.ui.tablet.computer.only.padded.grid
+  .ui.inverted.borderless.top.fixed.fluid.menu
+    %a.header.item Makar Data Manager
+    .right.menu
+      %a.item{ href: "/"}
+        %i.icon.question
+        = "Records"
+      %a.item{ href: "/schemas"}
+        %i.icon.puzzle
+        = "Schemas"
+      %a.item{ href: "/collections"}
+        %i.icon.folder
+        = "Collections"
+      %a.item{ href: "/import"}
+        %i.icon.download
+        = "Import"
+      %a.item{ href: "/transformations"}
+        %i.icon.wrench
+        = "Transformations"
+      %a.item{ href: "/jobs"}
+        %i.icon.briefcase
+        = "Jobs"
+      -# %a.item{ href: "/examples"}
+      -#   %i.icon.plug
+      -#   = "Example"
+
+-# Mobile Nav
+.ui.mobile.only.padded.grid
+  .ui.top.fixed.borderless.fluid.inverted.menu
+    %a.header.item Project Name
+    .right.menu
+      .item
+        %button.ui.icon.toggle.basic.inverted.button
+          %i.content.icon
+    .ui.vertical.borderless.inverted.fluid.menu
+      %a.item{ href: "/"}
+        %i.icon.question
+        = "Questions"
+      %a.item{ href: "/collections"}
+        %i.icon.folder
+        = "Collections"
+      %a.item{ href: "/import"}
+        %i.icon.download
+        = "Import"
+      %a.item{ href: "/transformations"}
+        %i.icon.wrench
+        = "Transformations"
+      %a.item{ href: "/jobs"}
+        %i.icon.briefcase
+        = "Jobs"
+      -# %a.item{ href: "/examples"}
+      -#   %i.icon.plug
+      -#   = "Example"

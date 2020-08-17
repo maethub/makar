@@ -1,0 +1,8 @@
+.row
+  .column
+    %h3 Data Records
+    = render partial: 'search', locals: { r: @r }
+
+.row
+  .column
+    = render partial: 'table', locals: { records: @records }

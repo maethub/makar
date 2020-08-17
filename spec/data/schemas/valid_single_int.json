@@ -1,0 +1,6 @@
+{
+  "name": "TestRecord",
+  "attributes": [
+    { "name": "myInt", "type": "int" }
+  ]
+}

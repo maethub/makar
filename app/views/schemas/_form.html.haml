@@ -1,0 +1,14 @@
+= simple_form_for @schema, input_html: { class: 'ui form' } do |f|
+  = f.input :name
+  = f.input :schema, as: :text
+  = f.button :submit
+
+:javascript
+  var ta = document.getElementById("schema_schema");
+  var myCodeMirror = CodeMirror.fromTextArea(ta, {
+    mode: 'application/json',
+    lineNumbers: true,
+    lineWrapping: true,
+    matchBrackets: true,
+    autoCloseBrackets: true
+  });

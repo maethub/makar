@@ -1,0 +1,8 @@
+.row
+  .column
+    %h3= "Collection #{@collection.name}"
+
+
+.row
+  .column
+    = render partial: 'table', locals: { records: @records }

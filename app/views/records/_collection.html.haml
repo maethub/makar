@@ -1,0 +1,4 @@
+- if collection.has_record? record
+  %a.ui.primary.button.mb-1{ role: 'button', href: toggle_collection_record_path(record, { collection_id: collection.id }), 'data-remote': 'true', 'data-method': 'get' }= collection.name
+- else
+  %a.ui.basic.button.mb-1{ role: 'button', href: toggle_collection_record_path(record, { collection_id: collection.id }), 'data-remote': 'true', 'data-method': 'get' }= collection.name
